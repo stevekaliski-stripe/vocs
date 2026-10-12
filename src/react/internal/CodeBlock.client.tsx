@@ -11,14 +11,14 @@ export function WrapButton({ defaultWrapped = false }: WrapButton.Props) {
   const [singleLine, setSingleLine] = React.useState(false)
 
   React.useEffect(() => {
-    const pre = buttonRef.current?.parentElement as HTMLPreElement | null
+    const pre = buttonRef.current?.parentElement?.querySelector('pre')
     if (!pre) return
     const lineCount = pre.querySelectorAll('.line').length
     setSingleLine(lineCount <= 1)
   }, [])
 
   const toggle = React.useCallback(() => {
-    const pre = buttonRef.current?.parentElement as HTMLPreElement | null
+    const pre = buttonRef.current?.parentElement?.querySelector('pre')
     if (!pre) return
     const next = !wrapped
     setWrapped(next)
@@ -55,7 +55,7 @@ export function CopyButton() {
   const [hasShellPrompts, setHasShellPrompts] = React.useState(false)
 
   React.useEffect(() => {
-    const pre = buttonRef.current?.parentElement as HTMLPreElement | null
+    const pre = buttonRef.current?.parentElement?.querySelector('pre')
     if (!pre) return
     const lineCount = pre.querySelectorAll('.line').length
     setSingleLine(lineCount <= 1)
@@ -71,7 +71,7 @@ export function CopyButton() {
   }, [copied])
 
   const copy = React.useCallback(() => {
-    const pre = buttonRef.current?.parentElement as HTMLPreElement | null
+    const pre = buttonRef.current?.parentElement?.querySelector('pre')
     if (!pre) return
 
     const node = pre.cloneNode(true) as HTMLPreElement

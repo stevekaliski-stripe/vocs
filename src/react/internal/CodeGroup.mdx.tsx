@@ -115,7 +115,7 @@ function CodeGroupPanels({ items }: { items: CodeGroupItem[] }) {
           'data-v-code-container' in (content.props as React.ComponentProps<'div'>)
         return (
           <Tabs.Panel
-            className="vocs:col-start-1 vocs:row-start-1 vocs:min-w-0 vocs:*:rounded-t-none vocs:*:border-t-0 vocs:data-hidden:invisible"
+            className="vocs:col-start-1 vocs:row-start-1 vocs:min-w-0 vocs:*:rounded-t-none vocs:*:border-t-0 vocs:[&>[data-v-code-body]>pre]:rounded-t-none vocs:[&>[data-v-code-body]>pre]:border-t-0 vocs:data-hidden:invisible"
             data-v-code-group-panel
             keepMounted
             key={value || i.toString()}
@@ -137,6 +137,7 @@ function CodeGroupPanels({ items }: { items: CodeGroupItem[] }) {
 
 function CodeBlock({ node }: { node: React.ReactNode }): React.ReactElement | null {
   if (!React.isValidElement(node)) return null
+  if ('data-v-code-body' in (node.props as React.ComponentProps<'div'>)) return node
   if (node.type === 'pre') return node
   const children = React.Children.toArray((node.props as { children?: React.ReactNode })?.children)
   for (const child of children) {

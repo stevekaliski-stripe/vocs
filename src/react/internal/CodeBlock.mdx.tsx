@@ -22,23 +22,25 @@ export function CodeBlock(props: CodeBlock.Props) {
           </span>
         </div>
       )}
-      <pre
-        {...props}
-        className={cx(
-          className,
-          'vocs:relative vocs:group/code',
-          title ? ' vocs:rounded-t-none vocs:border-t-0' : '',
-        )}
-        data-v-wrapped={showWrap !== undefined ? '' : undefined}
-        data-v
-      >
-        {props.children}
+      <div className="vocs:relative vocs:group/code vocs:max-md:-mx-4" data-v-code-body>
+        <pre
+          {...props}
+          className={cx(
+            className,
+            'vocs:relative vocs:max-md:mx-0',
+            title ? ' vocs:rounded-t-none vocs:border-t-0' : '',
+          )}
+          data-v-wrapped={showWrap !== undefined ? '' : undefined}
+          data-v
+        >
+          {props.children}
+          {isShell !== undefined && <ShellLineCopyButtons />}
+          <CollapseHandler />
+          <FoldHandler />
+        </pre>
         {showWrap !== undefined && <WrapButton defaultWrapped />}
         <CopyButton />
-        {isShell !== undefined && <ShellLineCopyButtons />}
-        <CollapseHandler />
-        <FoldHandler />
-      </pre>
+      </div>
     </div>
   )
 }
